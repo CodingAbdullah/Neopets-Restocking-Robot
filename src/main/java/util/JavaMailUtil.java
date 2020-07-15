@@ -1,5 +1,6 @@
 package util;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -12,13 +13,14 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import item_types.Item;
 
 // Send an alert to your email when the robot finds a super rare item, this will notify you to clear the capcha box for security reasons.
 // Set to gmail and makes use of the SMTP architecture
 
 public final class JavaMailUtil {
 
-	public static void sendEmail(String neopetItem, String price) throws MessagingException {
+	public static void sendEmail(List<? extends Item> neopetItems) throws MessagingException {
 		Dotenv dotenv = Dotenv.load();
 		Properties properties = new Properties();
 		
@@ -38,19 +40,24 @@ public final class JavaMailUtil {
 			}
 		});
 		
-		Message message = prepareMessage(session, emailAddress, password, neopetItem, price); // Specify the item bought and the price
+		Message message = prepareMessage(session, emailAddress, password, neopetItems); // Specify the item bought and the price
 		
 		Transport.send(message);
 		System.out.println("Message sent successfully");
 	}
 	
-	public static Message prepareMessage(Session session, String emailAddress, String password, String neopetItem, String price) {
+	// Any list of items (food, battle, magic).. as they all inherit from the abstract Item class
+	
+	public static Message prepareMessage(Session session, String emailAddress, String password, List<? extends Item> neopetItems) {
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(emailAddress));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress)); // Recipient is the same as sender
-			message.setSubject(neopetItem);
-			message.setText(neopetItem + " " + price + " " + " please clear capacha now!");
+			message.setSubject("Items to buy");
+			
+			for (int i = 0; i < neopetItems.size(); i++) {
+				message.setText(neopetItems.get(i).getName() + " " + neopetItems.get(i).getPrice()); // Populate the message with the item list
+			}
 			return message;
 		}
 		catch (Exception e) {

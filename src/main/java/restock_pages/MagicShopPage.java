@@ -1,33 +1,8 @@
 package restock_pages;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-
 public class MagicShopPage {
 	
-	private WebDriver driver;
 	
-	public MagicShopPage(WebDriver driver) {
-		this.driver = driver;
-		
-		PageFactory.initElements(driver, this);
-		
-		findPotionItem();
-	}
-	
-	public void findPotionItem() {
-		// Scrap through the shops item list using the driver, return a list to begin analysis
-		List<WebElement> shopItemList = driver.findElements(By.xpath("//body//div[@id='content']//table//form[2]//table//table//tbody//tr[2]//tr[1]//td"));
-	
-		for (int i = 1; i <= shopItemList.size(); i++) { // Iterate through the list of items in the shop
-			WebElement item = driver.findElement(By.xpath("//body//div[@id='content']//table//form[2]//table//table//tbody//tr[2]//tr[1]//td[" + i + "]"));
-			System.out.println(item.getText());
-		}
-	}
 	
 	private boolean itemToBeConsidered(String itemName) {
 		// Super Rare ones
@@ -80,4 +55,5 @@ public class MagicShopPage {
 			return false;
 		}
 	}	
+
 }

@@ -2,25 +2,29 @@ package runner;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.mail.MessagingException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import restock_pages.MagicShopPage;
+import restock_pages.FoodShopPage;
 import restock_pages.LoginPage;
 
 public class Runner {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MessagingException {
 		Dotenv dotenv = Dotenv.load(); // Load all environment variables (key value pairs) from the .env file in the root of project
 		
 		LoginPage loginPage;
-		MagicShopPage magicShopPage;
+		FoodShopPage foodShopPage;
 		
 		System.setProperty("webdriver.chrome.driver", dotenv.get("chrome_driver_path"));
 		WebDriver driver = new ChromeDriver();
 		
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		driver.get("http://www.neopets.com/login/");
 		
 		loginPage = new LoginPage(driver);
@@ -31,9 +35,9 @@ public class Runner {
 		
 		driver = loginPage.getWebDriver();
 		
-		driver.get("http://www.neopets.com/objects.phtml?obj_type=2&type=shop");
+		driver.get("http://www.neopets.com/objects.phtml?obj_type=1&type=shop"); // After login, navigate to the food shop
 		
-		magicShopPage = new MagicShopPage(driver);
+		foodShopPage = new FoodShopPage(driver);
 		
 	}
 }
