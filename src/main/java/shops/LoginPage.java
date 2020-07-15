@@ -1,4 +1,4 @@
-package restock_pages;
+package shops;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

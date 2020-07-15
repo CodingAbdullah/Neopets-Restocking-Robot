@@ -1,4 +1,4 @@
-package item_types;
+package items;
 
 // Abstract class Item for other specific items to build on, basic attributes include, name and price
 

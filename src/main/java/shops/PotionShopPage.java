@@ -1,6 +1,6 @@
-package restock_pages;
+package shops;
 
-public class MagicShopPage {
+public class PotionShopPage {
 	
 	
 	

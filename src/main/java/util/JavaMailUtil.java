@@ -13,7 +13,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import item_types.Item;
+import items.BattleItem;
+import items.FoodItem;
+import items.Item;
 
 // Send an alert to your email when the robot finds a super rare item, this will notify you to clear the capcha box for security reasons.
 // Set to gmail and makes use of the SMTP architecture
@@ -53,8 +55,15 @@ public final class JavaMailUtil {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(emailAddress));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress)); // Recipient is the same as sender
-			message.setSubject("Items to buy");
 			
+			if (neopetItems.get(0) instanceof FoodItem) {
+				message.setSubject("Food Items to buy");
+			}
+			else if (neopetItems.get(0) instanceof BattleItem) {
+				message.setSubject("Battle Items to buy");
+			}
+			
+			message.setText("Item" + "     " + "Cost");
 			for (int i = 0; i < neopetItems.size(); i++) {
 				message.setText(neopetItems.get(i).getName() + " " + neopetItems.get(i).getPrice()); // Populate the message with the item list
 			}

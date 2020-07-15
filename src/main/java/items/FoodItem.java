@@ -1,4 +1,4 @@
-package item_types;
+package items;
 
 
 // Class representing food items from the food shop

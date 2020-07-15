@@ -1,4 +1,4 @@
-package restock_pages;
+package shops;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import item_types.FoodItem;
+import items.FoodItem;
 import util.JavaMailUtil;
 
 public class FoodShopPage {
@@ -59,9 +59,10 @@ public class FoodShopPage {
 			}
 		}
 		
-		// Once this process is complete, send email notifying the user of the list of interesting food items 
-		JavaMailUtil.sendEmail(foodItemsList);
-		
+		// Once this process is complete, send email if there is a list of interesting food items 
+		if (foodItemsList.size() > 0) {
+			JavaMailUtil.sendEmail(foodItemsList);
+		}		
 	}
 	
 	private String filterItemName(String itemDescription) {
@@ -90,5 +91,4 @@ public class FoodShopPage {
 
 		}
 	}
-
 }

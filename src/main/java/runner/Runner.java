@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import restock_pages.FoodShopPage;
-import restock_pages.LoginPage;
+import shops.FoodShopPage;
+import shops.LoginPage;
 
 public class Runner {
 	
