@@ -18,7 +18,7 @@ Other security techniques include restock bans. So this just means you cannot bu
 even in rare cases, days). This doesn't mean your banned from the game, it's a way for TNT to control master restockers or that odd robot ahem, :) from constantly 
 snooping for items.
 
-Constantly refreshing pages will lead to a restock ban. To avoid this, the robot is set to refresh the page every 30 or so seconds. With a constant loop have it run
+Constantly refreshing pages will lead to a restock ban. To avoid this, the robot is set to refresh the page every 30 or so, seconds with a constant loop have it run
 24 hours!  
 
 This may not always be foulproof, though. It is possible that all of a sudden the items in the shop disappear (and then you know you've been banned).
