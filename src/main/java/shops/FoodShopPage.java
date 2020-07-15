@@ -39,14 +39,14 @@ public class FoodShopPage {
 			for (int j = 1; j <= columns; j++) {
 				WebElement item = driver.findElement(By.xpath("//body//div[@id='content']//table//form[2]//table//table//tbody//tr[2]//tr[" + i + "]//td[" + j + "]")); // Grid x by y so iterate items
 				
-				// Only considering those food items with stock less than 5 or value greater than 1000 NP, they are rare.
+				// Only considering those food items with stock less than or equal to 5 and value greater than 1000 NP, they are rare.
 				if (filterItemQuantity(item.getText()) <= 5 && filterItemCost(item.getText()) > 1000) {
 					
 					// Neggs are the exception :)
 					if (filterItemName(item.getText()).contains("Negg")) {
 						foodItemsList.add(new FoodItem(filterItemName(item.getText()), filterItemQuantity(item.getText()), filterItemCost(item.getText()))); // populate the foodItemsList
 					}
-					else if (filterItemCost(item.getText()) == 2500) { // Exact items will not be considered, they are traps
+					else if (filterItemCost(item.getText()) == 2500) { // Exact cost items will not be considered, they are traps
 						continue;
 					}
 					else {

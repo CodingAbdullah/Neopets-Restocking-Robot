@@ -52,6 +52,7 @@ public final class JavaMailUtil {
 	
 	public static Message prepareMessage(Session session, String emailAddress, String password, List<? extends Item> neopetItems) {
 		try {
+			String messageConstructor = "";
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(emailAddress));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress)); // Recipient is the same as sender
@@ -63,10 +64,12 @@ public final class JavaMailUtil {
 				message.setSubject("Battle Items to buy");
 			}
 			
-			message.setText("Item" + "     " + "Cost");
 			for (int i = 0; i < neopetItems.size(); i++) {
-				message.setText(neopetItems.get(i).getName() + " " + neopetItems.get(i).getPrice()); // Populate the message with the item list
+				messageConstructor += neopetItems.get(i).getName() + "   " + neopetItems.get(i).getPrice() + "\n";
 			}
+			
+			message.setText(messageConstructor); // Populate the message with the item list
+
 			return message;
 		}
 		catch (Exception e) {
