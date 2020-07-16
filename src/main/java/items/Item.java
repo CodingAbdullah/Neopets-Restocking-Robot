@@ -5,11 +5,11 @@ package items;
 public abstract class Item {
 
 	protected String name;
-	protected int price;
+	protected int cost;
 	
-	protected Item(String name, int price) {
+	protected Item(String name, int cost) {
 		this.name = name;
-		this.price = price;
+		this.cost = cost;
 	}
 	
 	protected void setName(String name) {
@@ -20,11 +20,11 @@ public abstract class Item {
 		return this.name;
 	}
 	
-	protected void setPrice(int price) {
-		this.price = price;
+	protected void setPrice(int cost) {
+		this.cost = cost;
 	}
 	
 	public int getPrice() {
-		return this.price;
+		return this.cost;
 	}
 }

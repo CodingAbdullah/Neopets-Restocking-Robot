@@ -8,8 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import shops.FoodShopPage;
-import shops.LoginPage;
+import pages.FoodShopPage;
+import pages.LoginPage;
+import pages.PharmaShopPage;
+import pages.PotionShopPage;
 
 public class Runner {
 	
@@ -18,11 +20,14 @@ public class Runner {
 		
 		LoginPage loginPage;
 		FoodShopPage foodShopPage;
+		PharmaShopPage pharmaShopPage;
+		PotionShopPage potionShopPage;
 		
 		System.setProperty("webdriver.chrome.driver", dotenv.get("chrome_driver_path"));
 		WebDriver driver = new ChromeDriver();
 		
-		final int SHOP_NUMBER = 1; // Change shop number to the corresponding shop (1 -> Food, 2 -> Potion, 9 -> Battle) 
+		final int [] SHOP_NUMBERS = new int[] {1, 2, 13}; // Corresponding shops (1 -> Food, 2 -> Potion, 13 -> Pharma) 
+		int randomShop = (int)((int) 3 * Math.random() + 1);
 		
 		driver.manage().window().maximize();
 		
@@ -37,9 +42,19 @@ public class Runner {
 		
 		driver = loginPage.getWebDriver();
 		
-		driver.get("http://www.neopets.com/objects.phtml?type=shop&obj_type=" + SHOP_NUMBER); // After login, navigate to the requested shop
-		
-		foodShopPage = new FoodShopPage(driver);
-		
+		switch (randomShop) {
+		case 1:
+			driver.get("http://www.neopets.com/objects.phtml?type=shop&obj_type=" + SHOP_NUMBERS[randomShop - 1]); // After login, navigate to the random shop
+			foodShopPage = new FoodShopPage(driver);
+			break;
+		case 2:
+			driver.get("http://www.neopets.com/objects.phtml?type=shop&obj_type=" + SHOP_NUMBERS[randomShop - 1]); // After login, navigate to the random shop
+		 	potionShopPage = new PotionShopPage(driver);
+			break;
+		case 3:
+			driver.get("http://www.neopets.com/objects.phtml?type=shop&obj_type=" + SHOP_NUMBERS[randomShop - 1]); // After login, navigate to the random shop
+			pharmaShopPage = new PharmaShopPage(driver);
+			break;
+		}		
 	}
 }

@@ -1,4 +1,4 @@
-package shops;
+package pages;
 
 import javax.mail.MessagingException;
 

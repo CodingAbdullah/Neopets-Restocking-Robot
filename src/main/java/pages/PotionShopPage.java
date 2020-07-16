@@ -1,8 +1,26 @@
-package shops;
+package pages;
 
 import javax.mail.MessagingException;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
 public class PotionShopPage extends ShopPage {
+	private WebDriver driver;
+	
+	public PotionShopPage(WebDriver driver) throws MessagingException {
+		this.driver = driver;
+		
+		PageFactory.initElements(driver, this);
+		findItem();
+	}
+	
+	@Override
+	protected void findItem() throws MessagingException {
+		
+	}	
+
+	
 	
 	private boolean itemToBeConsidered(String itemName) {
 		// Super Rare ones
@@ -55,11 +73,4 @@ public class PotionShopPage extends ShopPage {
 			return false;
 		}
 	}
-
-	@Override
-	protected void findItem() throws MessagingException {
-		// TODO Auto-generated method stub
-		
-	}	
-
 }
