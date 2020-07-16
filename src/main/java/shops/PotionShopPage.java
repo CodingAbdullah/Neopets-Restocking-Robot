@@ -1,8 +1,8 @@
 package shops;
 
-public class PotionShopPage {
-	
-	
+import javax.mail.MessagingException;
+
+public class PotionShopPage extends ShopPage {
 	
 	private boolean itemToBeConsidered(String itemName) {
 		// Super Rare ones
@@ -54,6 +54,12 @@ public class PotionShopPage {
 		else {
 			return false;
 		}
+	}
+
+	@Override
+	protected void findItem() throws MessagingException {
+		// TODO Auto-generated method stub
+		
 	}	
 
 }

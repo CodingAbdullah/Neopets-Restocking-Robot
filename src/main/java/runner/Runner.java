@@ -13,7 +13,7 @@ import shops.LoginPage;
 
 public class Runner {
 	
-	public static void main(String[] args) throws MessagingException {
+	public static void main(String[] args) throws MessagingException, InterruptedException {
 		Dotenv dotenv = Dotenv.load(); // Load all environment variables (key value pairs) from the .env file in the root of project
 		
 		LoginPage loginPage;
@@ -21,6 +21,8 @@ public class Runner {
 		
 		System.setProperty("webdriver.chrome.driver", dotenv.get("chrome_driver_path"));
 		WebDriver driver = new ChromeDriver();
+		
+		final int SHOP_NUMBER = 1; // Change shop number to the corresponding shop (1 -> Food, 2 -> Potion, 9 -> Battle) 
 		
 		driver.manage().window().maximize();
 		
@@ -35,7 +37,7 @@ public class Runner {
 		
 		driver = loginPage.getWebDriver();
 		
-		driver.get("http://www.neopets.com/objects.phtml?obj_type=1&type=shop"); // After login, navigate to the food shop
+		driver.get("http://www.neopets.com/objects.phtml?type=shop&obj_type=" + SHOP_NUMBER); // After login, navigate to the requested shop
 		
 		foodShopPage = new FoodShopPage(driver);
 		
