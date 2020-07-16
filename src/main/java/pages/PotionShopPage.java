@@ -17,19 +17,28 @@ public class PotionShopPage extends ShopPage {
 	private WebDriver driver;
 	private List<PotionItem> potionList;
 	
-	public PotionShopPage(WebDriver driver) throws MessagingException {
+	public PotionShopPage(WebDriver driver) throws MessagingException, InterruptedException {
 		this.driver = driver;
 		
 		PageFactory.initElements(driver, this);
 		this.potionList = new ArrayList<PotionItem>();
-		findItem();
+		
+		for (int i = 0 ; i < 5760; i++) { // Have it run on 15 second intervals => 4/minute, 240/hour, 5760/day :)
+			findItem(); // Start the automated process
+			Thread.sleep(15000L); // Set to 15 seconds, but you can have it refresh any time you want it to (time is entered as a long and is in milliseconds) :)
+			driver.navigate().refresh();
+		}
 	}
 	
 	@Override
 	protected void findItem() throws MessagingException {
-		if (potionExists().size() != 0) {
-			JavaMailUtil.sendEmail(potionExists());
+		List<PotionItem> foundPotions = potionExists();
+		
+		if (foundPotions.size() != 0) {
+			JavaMailUtil.sendEmail(foundPotions);
 		}
+		
+		this.potionList.removeAll(potionList);
 	}	
 
 	private List<PotionItem> potionExists() {

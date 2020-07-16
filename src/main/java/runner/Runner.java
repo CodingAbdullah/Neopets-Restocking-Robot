@@ -27,7 +27,8 @@ public class Runner {
 		WebDriver driver = new ChromeDriver();
 		
 		final int [] SHOP_NUMBERS = new int[] {1, 2, 13}; // Corresponding shops (1 -> Food, 2 -> Potion, 13 -> Pharma) 
-		int randomShop = (int)((int) 3 * Math.random() + 1);
+		
+		int randomShop = (int)((int) 3 * Math.random() + 1); // Randomly select which of the three shops to restock from
 		
 		driver.manage().window().maximize();
 		
@@ -55,6 +56,8 @@ public class Runner {
 			driver.get("http://www.neopets.com/objects.phtml?type=shop&obj_type=" + SHOP_NUMBERS[randomShop - 1]); // After login, navigate to the random shop
 			pharmaShopPage = new PharmaShopPage(driver);
 			break;
-		}		
+		}	
+		
+		driver.close(); // Close the driver
 	}
 }
